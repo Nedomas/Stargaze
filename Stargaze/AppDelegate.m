@@ -10,12 +10,21 @@
 
 @implementation AppDelegate
 
+@synthesize hello = _hello;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _hello = @"Hello, Mr developer.";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    CGRect textRect = CGRectMake(0,0,200,50);
+    UILabel *myLabel = [[UILabel alloc] initWithFrame:textRect];
+    myLabel.text = _hello;
+    myLabel.center = self.window.center;
+    [self.window addSubview:myLabel];
     return YES;
 }
 
