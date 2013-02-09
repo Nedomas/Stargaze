@@ -68,3 +68,5 @@ install2sim: AppBundle
 
 simulator: install2sim
 	open -a "iPhone Simulator"
+kill_simulator:
+	kill $(pgrep iOS Simulator)
