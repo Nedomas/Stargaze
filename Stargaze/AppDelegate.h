@@ -18,7 +18,7 @@
 @property (nonatomic, retain) CLLocationManager *locationMgr;
 @property (nonatomic, retain) CLLocation *lastLocation;
 
-- (IBAction)getNewLocation:(id)sender;
-- (void)startUpdatingLocation;
+// - (IBAction)getNewLocation:(id)sender;
+// - (void)startUpdatingLocation;
 
 @end
