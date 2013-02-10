@@ -6,5 +6,5 @@ git add .
 git commit -m "$commit_msg"
 git push origin magic
 
-ssh -p 3333 mac@85.206.12.21 'cd Workspace/Stargaze/Stargaze; git fetch; git checkout magic; git rebase origin/magic; kill $(pgrep iOS Simulator); make simulator'
+ssh -p 3333 mac@85.206.12.21 'cd Workspace/Stargaze/Stargaze; git fetch; git checkout magic; git rebase origin/magic; make simulator'
 echo "Magic done!"

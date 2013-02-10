@@ -10,15 +10,16 @@
 
 @implementation AppDelegate
 
-@synthesize hello = _hello;
+@synthesize hello = _hello, locationMgr =  _locationMgr, lastLocation = _lastLocation;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    _hello = @"Bye bye, Mr super developer.";
+    _hello = @"Beye bye, Mr super developer.";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    NSLog(@"Somet");
 
     CGRect textRect = CGRectMake(0,0,200,50);
     UILabel *myLabel = [[UILabel alloc] initWithFrame:textRect];
