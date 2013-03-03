@@ -1,19 +1,19 @@
-ip="mac@192.168.0.128"
-port="22"
+ip="xxxx"
+port="xxxx"
 
 if [ $1 == "boom" ]
 then
   rsync -rtvu --progress --rsh="ssh -p$port" ../../Stargaze/ $ip:/Users/mac/Workspace/Stargaze/
-  ssh $ip 'cd Workspace/Stargaze/Stargaze; make alt_debug'
+  ssh $ip -p $port 'cd Workspace/Stargaze/Stargaze; make alt_debug'
 elif [ $1 == "log" ]
 then
-  ssh -t $ip 'tail -f /var/log/system.log | grep test'
+  ssh -t $ip -p $port 'tail -f /var/log/system.log | grep test'
 else
   if [ $1 ]
   then
     command="cd Workspace/Stargaze/Stargaze; make $1"
     echo "Executing '$command' on $ip"
-    ssh $ip $command
+    ssh $ip -p $port $command
   else
     time=$(date +"%Y-%m-%d %H:%M")
     commit_msg="Magic happened at $time"
@@ -23,7 +23,7 @@ else
     git commit -m "$commit_msg"
     git push origin magic
 
-    ssh $ip 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make debug'
+    ssh $ip -p $port 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make debug'
     echo "Magic done!"
   fi
 fi
