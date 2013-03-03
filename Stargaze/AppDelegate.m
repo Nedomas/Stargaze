@@ -10,15 +10,16 @@
 
 @implementation AppDelegate
 
-@synthesize hello = _hello;
+@synthesize hello = _hello, locationMgr =  _locationMgr, lastLocation = _lastLocation;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    _hello = @"Hello, Mr developer.";
+    _hello = @"Minde!";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    NSLog(@"We can finally drop synchronization via GitHub and use rsync (10x faster)!");
 
     CGRect textRect = CGRectMake(0,0,200,50);
     UILabel *myLabel = [[UILabel alloc] initWithFrame:textRect];
