@@ -19,7 +19,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    NSLog(@"BOOOOM");
+    NSLog(@"BOOOOM222");
 
     CGRect textRect = CGRectMake(0,0,200,50);
     UILabel *myLabel = [[UILabel alloc] initWithFrame:textRect];
