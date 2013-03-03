@@ -1,4 +1,4 @@
-if [ $1 == "init" ]; then
+if [ -n "$1" == "init" ]; then
   ssh mac@192.168.0.135 'cd Workspace/Stargaze/Stargaze; make init'
 else
   time=$(date +"%Y-%m-%d %H:%M")
