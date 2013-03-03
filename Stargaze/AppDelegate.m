@@ -14,12 +14,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    _hello = @"Beyeee bye, Mr super developer.";
+    _hello = @"Mr super developer.";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    NSLog(@"Somet");
+    NSLog(@"Something");
 
     CGRect textRect = CGRectMake(0,0,200,50);
     UILabel *myLabel = [[UILabel alloc] initWithFrame:textRect];
