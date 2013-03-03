@@ -76,6 +76,9 @@ simulator: install2sim
 simulator_location = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app/Contents/MacOS/iPhone\ Simulator
 compiled_app = /Users/mac/Workspace/Stargaze/Stargaze/test.app/test
 
+init:
+	open -a "iPhone Simulator"
+
 run: 
 	$(simulator_location) -SimulateApplication $(compiled_app)
 

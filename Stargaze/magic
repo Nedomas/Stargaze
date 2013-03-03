@@ -1,10 +1,14 @@
-time=$(date +"%Y-%m-%d %H:%M")
-commit_msg="Magic happened at $time"
+if [ "$1" == "init" ]; then
+  ssh mac@192.168.0.135 'cd Workspace/Stargaze/Stargaze; make init'
+else
+  time=$(date +"%Y-%m-%d %H:%M")
+  commit_msg="Magic happened at $time"
 
-git checkout magic
-git add .
-git commit -m "$commit_msg"
-git push origin magic
+  git checkout magic
+  git add .
+  git commit -m "$commit_msg"
+  git push origin magic
 
-ssh mac@192.168.0.135 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make debug'
-echo "Magic done!"
+  ssh mac@192.168.0.135 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make debug'
+  echo "Magic done!"
+fi
