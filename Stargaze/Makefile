@@ -80,7 +80,7 @@ init:
 	open -a "iPhone Simulator"
 
 run: 
-	$(simulator_location) -SimulateApplication $(compiled_app)
+	open $(simulator_location) -SimulateApplication $(compiled_app)
 
 debug: kill_simulator install2sim AppBundle run
 
