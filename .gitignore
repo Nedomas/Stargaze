@@ -43,7 +43,7 @@ DerivedData/
 build/
 
 # Ignore files from Make build
-Makefile
+# Makefile
 *.o
 *.app
 test
