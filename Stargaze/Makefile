@@ -73,8 +73,8 @@ kill_simulator:
 simulator: install2sim
 	open -a "iPhone Simulator"
 
-simulator_location = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app/Contents/MacOS/iPhone\ Simulator
-compiled_app = /Users/mac/Workspace/Stargaze/Stargaze/test.app/test
+simulator_location = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app/Contents/MacOS/iPhone\ Simulator"
+compiled_app = "/Users/mac/Workspace/Stargaze/Stargaze/test.app/test"
 
 init:
 	open -a "iPhone Simulator"
@@ -82,4 +82,6 @@ init:
 run: 
 	$(simulator_location) -SimulateApplication $(compiled_app)
 
-debug: AppBundle kill_simulator run
+debug: kill_simulator install2sim AppBundle run
+
+alt_debug: kill_simulator simulator

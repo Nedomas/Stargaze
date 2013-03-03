@@ -1,6 +1,10 @@
-if [ "$1" == "init" ]
+ip="mac@192.168.0.135"
+
+if [ $1 ]
 then
-  ssh mac@192.168.0.135 'cd Workspace/Stargaze/Stargaze; make init'
+  command="cd Workspace/Stargaze/Stargaze; make $1"
+  echo "Executing '$command' on $ip"
+  ssh $ip $command
 else
   time=$(date +"%Y-%m-%d %H:%M")
   commit_msg="Magic happened at $time"
@@ -10,7 +14,7 @@ else
   git commit -m "$commit_msg"
   git push origin magic
 
-  ssh mac@192.168.0.135 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make debug'
+  ssh $ip 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make debug'
   echo "Magic done!"
 fi
 
