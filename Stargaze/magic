@@ -1,21 +1,14 @@
-ip="xxxx"
-port="xxxx"
 
-if [ $1 == "boom" ]
-then
+
+if [ "$1" == "boom" ]; then
   rsync -rtvu --progress --rsh="ssh -p$port" ../../Stargaze/ $ip:/Users/mac/Workspace/Stargaze/
   ssh $ip -p $port 'cd Workspace/Stargaze/Stargaze; make alt_debug'
-elif [ $1 == "log" ]
-then
+elif [ "$1" == "log" ]; then
   ssh -t $ip -p $port 'tail -f /var/log/system.log | grep test'
-else
-  if [ $1 ]
-  then
-    command="cd Workspace/Stargaze/Stargaze; make $1"
-    echo "Executing '$command' on $ip"
-    ssh $ip -p $port $command
-  else
-    time=$(date +"%Y-%m-%d %H:%M")
+elif [ "$1" == "ssh" ]; then
+  ssh $ip -p $port
+elif [ "$1" == "fallback" ]; then
+  time=$(date +"%Y-%m-%d %H:%M")
     commit_msg="Magic happened at $time"
 
     git checkout magic
@@ -23,8 +16,26 @@ else
     git commit -m "$commit_msg"
     git push origin magic
 
-    ssh $ip -p $port 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make debug'
+    ssh $ip -p $port 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make alt_debug'
     echo "Magic done!"
-  fi
+elif [ "$1" ]; then
+  command="cd Workspace/Stargaze/Stargaze; make $1"
+  echo "Executing '$command' on $ip"
+  ssh $ip -p $port $command
+else
+  cat <<EOF
+Magic usage:
+
+bash magic [command]
+
+boom - Update Macbox and rerun updated simulator
+log - Tail application log (for NSLOG)
+fallback - Fallback Macbox update via Github (magic branch) and rerun simulator with app already started
+[any_other_command] - Runs any command
+
+If magic returns error: “[kill_simulator] Error 1”
+just run “bash magic init” to initialize first simulator.
+
+EOF
 fi
 exit 0

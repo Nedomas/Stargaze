@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Foundation/Foundation.h>
 
 @implementation AppDelegate
 
@@ -14,7 +15,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    _hello = @"Minde!";
+    _hello = @"This screen works!";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

@@ -2,7 +2,7 @@
 
   bash magic [command]
 
-## Magic commands:
+= Magic commands:
 
 Update Macbox and rerun updated simulator
 
@@ -12,14 +12,16 @@ Tail application log (for NSLOG)
 
   log
 
-Runs any command (look at Makefile) in Macbox /Users/mac/Workspace/Stargaze/
+Fallback Macbox update via Github (magic branch) and rerun simulator with app already started
+
+  fallback
+
+Runs any command via ssh
 
   [any_other_command]
 
-*DOES NOT WORK* Fallback Macbox update via Github (magic branch) and rerun simulator with app already started
-
   debug
 
-## Extra
+= Extra
 
 For now if magic returns "make: *** [kill_simulator] Error 1" => just run "bash magic init" to initialize first simulator for killing later.
