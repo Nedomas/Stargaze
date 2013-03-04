@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    NSLog(@"We can finally drop synchronization via GitHub and use rsync (10x faster)!");
+    NSLog(@"Some hardcore logging happening here!");
 
     CGRect textRect = CGRectMake(0,0,200,50);
     UILabel *myLabel = [[UILabel alloc] initWithFrame:textRect];

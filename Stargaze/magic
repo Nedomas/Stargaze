@@ -1,8 +1,15 @@
+source config.personal
 
+project_dir=/Users/mac/Workspace/Stargaze
 
 if [ "$1" == "boom" ]; then
-  rsync -rtvu --progress --rsh="ssh -p$port" ../../Stargaze/ $ip:/Users/mac/Workspace/Stargaze/
-  ssh $ip -p $port 'cd Workspace/Stargaze/Stargaze; make alt_debug'
+  rsync -rtvu --progress --rsh="ssh -p$port" ../../Stargaze/ $ip:$project_dir/
+  ssh $ip -p $port "cd $project_dir/Stargaze; make alt_debug"
+elif [ "$1" == "debug" ]; then
+  rsync -rtvu --progress --rsh="ssh -p$port" ../../Stargaze/ $ip:$project_dir/
+  echo 'Building and relaunching simulator...'
+  ssh $ip -p $port "cd $project_dir/Stargaze; make AppBundle; ruby launcher.rb"
+  echo 'Done!'
 elif [ "$1" == "log" ]; then
   ssh -t $ip -p $port 'tail -f /var/log/system.log | grep test'
 elif [ "$1" == "ssh" ]; then
@@ -16,10 +23,10 @@ elif [ "$1" == "fallback" ]; then
     git commit -m "$commit_msg"
     git push origin magic
 
-    ssh $ip -p $port 'cd Workspace/Stargaze/Stargaze; git pull origin magic; make alt_debug'
+    ssh $ip -p $port "cd $project_dir/Stargaze; git pull origin magic; make alt_debug"
     echo "Magic done!"
 elif [ "$1" ]; then
-  command="cd Workspace/Stargaze/Stargaze; make $1"
+  command="cd $project_dir/Stargaze; make $1"
   echo "Executing '$command' on $ip"
   ssh $ip -p $port $command
 else
@@ -28,7 +35,8 @@ Magic usage:
 
 bash magic [command]
 
-boom - Update Macbox and rerun updated simulator
+debug - Update Macbox, rerun simulator and open the app (via Frank direct loader)
+boom - Update Macbox and rerun updated simulator (regular way)
 log - Tail application log (for NSLOG)
 fallback - Fallback Macbox update via Github (magic branch) and rerun simulator with app already started
 [any_other_command] - Runs any command
