@@ -16,18 +16,24 @@ elif [ "$1" == "ssh" ]; then
   ssh $ip -p $port
 elif [ "$1" == "fallback" ]; then
   time=$(date +"%Y-%m-%d %H:%M")
-    commit_msg="Magic happened at $time"
+  commit_msg="Magic happened at $time"
 
-    git checkout magic
-    git add .
-    git commit -m "$commit_msg"
-    git push origin magic
+  git checkout magic
+  git add .
+  git commit -m "$commit_msg"
+  git push origin magic
 
-    ssh $ip -p $port "cd $project_dir/Stargaze; git pull origin magic; make alt_debug"
-    echo "Magic done!"
+  ssh $ip -p $port "cd $project_dir/Stargaze; git pull origin magic; make alt_debug"
+  echo "Magic done!"
+elif [ "$1" == "init" ]; then
+  ssh $ip -p $port 'cd $project_dir/Stargaze; make init'
+elif [ "$1" == "test" ]; then
+  test_file=$2
+  command="cucumber $project_dir/Frank/features/$test_file --f pretty"
+  ssh $ip -p $port $command
 elif [ "$1" ]; then
-  command="cd $project_dir/Stargaze; make $1"
-  echo "Executing '$command' on $ip"
+  command="$@"
+  echo "Executing '$command' on $ip:$port"
   ssh $ip -p $port $command
 else
   cat <<EOF
@@ -38,6 +44,8 @@ bash magic [command]
 debug - Update Macbox, rerun simulator and open the app (via Frank direct loader)
 boom - Update Macbox and rerun updated simulator (regular way)
 log - Tail application log (for NSLOG)
+ssh - SSH into Macbox
+init - test [feature_file] (f.e. clean_start.feature)
 fallback - Fallback Macbox update via Github (magic branch) and rerun simulator with app already started
 [any_other_command] - Runs any command
 
