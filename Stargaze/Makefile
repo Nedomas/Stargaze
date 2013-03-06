@@ -38,6 +38,7 @@ GEN_UUID := EA72E90C-C91B-11DF-8FC4-539D12B3A9FF
 
 TARGET := test
 OBJS := \
+	Controll.o\
 	AppDelegate.o \
 	main.o
 

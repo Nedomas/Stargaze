@@ -18,15 +18,23 @@
     _hello = @"This screen works!";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor clearColor];
     [self.window makeKeyAndVisible];
     NSLog(@"Some hardcore logging happening here!");
 
-    CGRect textRect = CGRectMake(0,0,200,50);
+    /*CGRect textRect = CGRectMake(0,0,200,50);
     UILabel *myLabel = [[UILabel alloc] initWithFrame:textRect];
     myLabel.text = _hello;
+    myLabel.textColor = [UIColor redColor];
+    myLabel.fillColor = [UIColer clearCoror];
+    myLabel.shadowColor = [UIColor clearColor];
     myLabel.center = self.window.center;
-    [self.window addSubview:myLabel];
+    [self.window addSubview:myLabel];*/
+    UIButton *myButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [myButton addTarget:self action:@selector(wasTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [myButton setFrame:CGRectMake(30,30,30,30)];
+    [self.window addSubview:myButton];
+    //[self.window makeKeyAndVisible];
     return YES;
 }
 
