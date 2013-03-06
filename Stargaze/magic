@@ -11,7 +11,8 @@ elif [ "$1" == "debug" ]; then
   ssh $ip -p $port "cd $project_dir/Stargaze; make AppBundle; ruby launcher.rb"
   echo 'Done!'
 elif [ "$1" == "log" ]; then
-  ssh -t $ip -p $port 'tail -f /var/log/system.log | grep test'
+  echo 'Started log from Macbox'
+  ssh -t -t $ip -p $port 'tail -f /var/log/system.log | grep test'
 elif [ "$1" == "ssh" ]; then
   ssh $ip -p $port
 elif [ "$1" == "fallback" ]; then
@@ -31,6 +32,12 @@ elif [ "$1" == "test" ]; then
   test_file=$2
   command="cucumber $project_dir/Frank/features/$test_file --f pretty"
   ssh $ip -p $port $command
+elif [ "$1" == "quiet_build" ]; then
+  rsync -rtvuq --progress --rsh="ssh -p$port" ../../Stargaze/ $ip:$project_dir/
+  echo "Sync done! Building app and launching..."
+  ssh $ip -p $port screen -d -m "make AppBundle -C $project_dir/Stargaze; ruby $project_dir/Stargaze/launcher.rb"
+  echo "Launching done! Started log from Macbox."
+  ssh -t -t $ip -p $port 'tail -f /var/log/system.log | grep test'
 elif [ "$1" ]; then
   command="$@"
   echo "Executing '$command' on $ip:$port"
