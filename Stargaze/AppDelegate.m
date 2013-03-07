@@ -1,10 +1,9 @@
 #import "AppDelegate.h"
-#import <Foundation/Foundation.h>
-#import "Position.h"
 
 @implementation AppDelegate
 
 @synthesize hello = _hello;
+@synthesize dude = _dude;
 
 - (BOOL)application:(UIApplication *)application 
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -14,14 +13,12 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
 
-  float longtitude = [Position getLongtitude];
-
-  NSLog(@"%f", longtitude);
-
   UIButton *myButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-  myButton.frame = CGRectMake(10,10,50,50);
-  myButton.tag = 1;
-  [myButton addTarget:self action:@selector(buttonTouched) forControlEvents:UIControlEventTouchUpInside];
+  myButton.frame = CGRectMake(10,10,150,50);
+  myButton.tag = 15;
+  [myButton setTitle:@"Just click me!" forState:UIControlStateNormal];
+  [myButton addTarget:self action:@selector(buttonTouched:)
+    forControlEvents:UIControlEventTouchUpInside];
 
   // or you can do 
   // myButton.target = self;
@@ -29,13 +26,22 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
   myButton.center = self.window.center;
   [self.window addSubview:myButton];
+  NSLog(@"Added to addSubview");
   return YES;
 }
 
--(IBAction)buttonTouched {
-// or -(void)buttonTouched {
-// because nobody cares
+-(void)buttonTouched:(id)sender {
+  int myTag = ((UIButton*)sender).tag;
+  NSLog(@"%d", myTag);
   NSLog(@"So, so you thing you can tell");
+
+  _dude = [[Position alloc] init]; 
+  _dude.locationDude;
+
+  UILabel *someLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,300,50)];
+  someLabel.text = [NSString stringWithFormat:@"Hello mister. Your tag is %d", myTag];
+
+  [self.window addSubview:someLabel];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
