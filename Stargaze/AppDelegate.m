@@ -17,7 +17,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   UIButton *myButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   myButton.frame = CGRectMake(10,10,150,50);
   myButton.tag = 15;
-  [myButton setTitle:@"Just click me!" forState:UIControlStateNormal];
+  [myButton setTitle:@"Justs click me!" forState:UIControlStateNormal];
   [myButton addTarget:self action:@selector(buttonTouched:)
     forControlEvents:UIControlEventTouchUpInside];
 
@@ -27,7 +27,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
   myButton.center = self.window.center;
   [self.window addSubview:myButton];
-  NSLog(@"Added to addSubview");
+  // NSLog(@"Added to addSubview");
   return YES;
 }
 
@@ -36,21 +36,25 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   NSLog(@"%d", myTag);
   NSLog(@"So, so you thing you can tell");
 
-  CLController = [[Position alloc] init];
-  CLController.delegate = self;
-  [CLController.locMgr startUpdatingLocation];
+  self.CLController = [[Position alloc] init];
+  self.CLController.delegate = self;
+  [self.CLController.locMgr startUpdatingLocation];
+  NSLog(@"%@", self.CLController.locMgr);
 
   locLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,300,50)];
-  // someLabel.text = [NSString stringWithFormat:@"Hello mister. Your tag is %d", myTag];
+  // locLabel.text = @"Something";
+  locLabel.text = [NSString stringWithFormat:@"Hello mister. Your tag is %d", myTag];
 
   [self.window addSubview:locLabel];
 }
 
-- (void)locationUpdate:(CLLocation *)location {
+-(void)locationUpdate:(CLLocation *)location {
+  NSLog(@"inLocationUpdae");
   locLabel.text = [location description];
 }
  
-- (void)locationError:(NSError *)error {
+-(void)locationError:(NSError *)error {
+  NSLog(@"inLocERROR");
   locLabel.text = [error description];
 }
 

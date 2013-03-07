@@ -49,6 +49,9 @@ elif [ "$1" == "quiet_build" ] || [ "$1" == "sublime_build" ]; then
   ssh $ip -p $port "ruby $project_dir/Stargaze/builder.rb; ruby $project_dir/Stargaze/launcher.rb"
   echo "Command done in $(($(date +"%s")-$start))s! Started log from Macbox."
   ssh -t -t $ip -p $port 'tail -f /var/log/system.log | grep test'
+elif [ "$1" == "local_build" ]; then
+  ruby builder.rb
+  ruby launcher.rb
 elif [ "$1" == "sublime_test" ]; then
   test_file=$2
   rsync -rtvuq --progress --rsh="ssh -p$port" ../../Stargaze/ $ip:$project_dir/
