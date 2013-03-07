@@ -6,5 +6,5 @@ Scenario:
   App should start
 
 Given I launch the app
-
-Then I should see "This screen works!"
+When I touch "Just click me!"
+Then I should see "Hello mister"

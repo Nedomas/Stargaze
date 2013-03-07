@@ -4,6 +4,7 @@
 
 @synthesize hello = _hello;
 @synthesize dude = _dude;
+@synthesize CLController;
 
 - (BOOL)application:(UIApplication *)application 
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -35,13 +36,22 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   NSLog(@"%d", myTag);
   NSLog(@"So, so you thing you can tell");
 
-  _dude = [[Position alloc] init]; 
-  _dude.locationDude;
+  CLController = [[Position alloc] init];
+  CLController.delegate = self;
+  [CLController.locMgr startUpdatingLocation];
 
-  UILabel *someLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,300,50)];
-  someLabel.text = [NSString stringWithFormat:@"Hello mister. Your tag is %d", myTag];
+  locLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,300,50)];
+  // someLabel.text = [NSString stringWithFormat:@"Hello mister. Your tag is %d", myTag];
 
-  [self.window addSubview:someLabel];
+  [self.window addSubview:locLabel];
+}
+
+- (void)locationUpdate:(CLLocation *)location {
+  locLabel.text = [location description];
+}
+ 
+- (void)locationError:(NSError *)error {
+  locLabel.text = [error description];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
