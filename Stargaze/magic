@@ -20,6 +20,8 @@ elif [ "$1" == "log" ]; then
 elif [ "$1" == "local_log" ]; then
   echo 'Started log from YOUR BOX'
   tail -f /var/log/system.log | grep test
+elif [ "$1" == "ping" ]; then
+  ruby magic.rb ping
 else
   cat <<EOF
 Magic usage:

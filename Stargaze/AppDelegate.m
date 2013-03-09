@@ -1,15 +1,20 @@
 #import "AppDelegate.h"
+#import "MainViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application 
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  NSLog(@"App launched succesfully");
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  // Override point for customization after application launch.
   self.window.backgroundColor = [UIColor whiteColor];
+
+  // set the controller to our custom MainViewController
+  UIViewController *controller = [[MainViewController alloc] init];
+  self.window.rootViewController = controller;
+
   [self.window makeKeyAndVisible];
-  NSLog(@"Clean app launched very succesfully");
   return YES;
 }
 

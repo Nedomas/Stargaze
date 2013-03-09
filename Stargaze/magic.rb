@@ -1,27 +1,32 @@
 require 'net/ssh'
 
-$app_dir = ""
-if File.exist?('config.personal')
-  # in user
-  load 'config.personal'
-  $app_dir = Dir.pwd
-else
-  # in box
+macbox = !File.exist?('config.personal')
+begin
   require 'sim_launcher' # from Frank gem
-  $app_dir = "/Users/mac/Workspace/Stargaze/Stargaze"
-  $ip = $user = $port = 0
+rescue
+  raise if macbox
 end
 
+$app_dir = ""
 $project_dir_in_box = "/Users/mac/Workspace/Stargaze"
-$current_dir = 
 
-# user side methods
-class User
+if macbox
+  # in box
+  $ip = $user = $port = 0
+  $app_dir = "/Users/mac/Workspace/Stargaze/Stargaze"
+else
+  # in local
+  load 'config.personal' # load ip
+  $app_dir = Dir.pwd
+end
+
+# local side methods
+class Local
   class << self
     def sync
       puts "Started syncing..."
       `rsync -rtvuq --progress --rsh="ssh -p#{$port}" ../../Stargaze/ #{$user}@#{$ip}:#{$project_dir_in_box}/`
-      puts "Syncing done!\n"
+      puts "Syncing done!"
     end
   end
 end
@@ -39,7 +44,6 @@ class Box
     end
 
     def build
-      start_time = Time.now
       Dir.chdir($app_dir) do
         base_object_query = "Clang -arch i386 -Wno-import -Werror -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -c -o"
 
@@ -88,8 +92,6 @@ class Box
   end
 end
 
-puts 
-
 case ARGV[0]
 when 'ping'
   puts "Trying to connect to #{$user}@#{$ip}:#{$port}"
@@ -97,9 +99,10 @@ when 'ping'
     puts "SSH connection works!"
     puts "SSH into the box with: ssh #{$user}@#{$ip} -p #{$port}"
   end
-when 'sync' then User.sync
+when 'sync'
+  Local.sync
 when 'sync_build_launch'
-  User.sync
+  Local.sync
   Net::SSH.start($ip, $user, :port => $port) do |ssh|
     puts 'Started building...'
     ssh.exec!("ruby #{$project_dir_in_box}/Stargaze/magic.rb box build")
