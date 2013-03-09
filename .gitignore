@@ -48,7 +48,8 @@ build/
 *.app
 test
 test.*
-magic
+config.personal
+generated_config
 
 #####
 # Xcode private settings (window sizes, bookmarks, breakpoints, custom executables, smart groups)

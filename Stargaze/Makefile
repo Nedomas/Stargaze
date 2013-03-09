@@ -20,7 +20,7 @@ CFLAGS += -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100
 CFLAGS += -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk
 LDFLAGS += -Xlinker -objc_abi_version -Xlinker 2
 LDFLAGS += -lobjc
-LDFLAGS += -framework Foundation -framework UIKit -framework CoreGraphics
+LDFLAGS += -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreLocation
 
 else
 
