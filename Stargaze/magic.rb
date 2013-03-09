@@ -1,5 +1,4 @@
 require 'net/ssh'
-require 'sim_launcher' # from Frank gem
 
 $app_dir = ""
 if File.exist?('config.personal')
@@ -8,6 +7,7 @@ if File.exist?('config.personal')
   $app_dir = Dir.pwd
 else
   # in box
+  require 'sim_launcher' # from Frank gem
   $app_dir = "/Users/mac/Workspace/Stargaze/Stargaze"
   $ip = $user = $port = 0
 end

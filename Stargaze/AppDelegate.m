@@ -9,7 +9,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   // Override point for customization after application launch.
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
-  NSLog(@"Clean app launched succesfully");
+  NSLog(@"Clean app launched very succesfully");
   return YES;
 }
 
