@@ -9,9 +9,13 @@
 
   locationDude = [[CLLocationManager alloc] init];
   locationDude.delegate = self;
+  motionDude = [[CMMotionManager alloc] init];
 
   [locationDude startUpdatingLocation];
+  [motionDude startDeviceMotionUpdates];
+
   self.coords = coords;
+  self.motion = motionDude.deviceMotion;
 
   return self;
 }
@@ -20,8 +24,8 @@
 didUpdateLocations:(NSArray *)locations {
   CLLocationCoordinate2D coordinates = [[locations lastObject] coordinate];
   coords = [[NSDictionary alloc] initWithObjectsAndKeys:
-    [NSString stringWithFormat:@"%g", coordinates.longitude], @"longitude",
-    [NSString stringWithFormat:@"%g", coordinates.latitude], @"latitude", nil];
+    [NSString stringWithFormat:@"%f", coordinates.longitude], @"longitude",
+    [NSString stringWithFormat:@"%f", coordinates.latitude], @"latitude", nil];
   
   // stop after we have any data
   [locationDude stopUpdatingLocation];

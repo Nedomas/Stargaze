@@ -4,7 +4,7 @@
 @interface MainViewController : UIViewController {
 }
 
-@property (strong, nonatomic) Position *gps;
--(void)buttonTouched:(id)sender;
+@property (strong, nonatomic) Position *position;
+- (void)buttonTouched:(id)sender;
 
 @end
