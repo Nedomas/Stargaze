@@ -2,9 +2,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
 
-@interface Position : NSObject<CLLocationManagerDelegate> {
-  CLLocationManager *locationDude;
-  CMMotionManager *motionDude;
+@interface SimulatedPosition : NSObject {
   NSDictionary *coords;
   NSDictionary *heading;
   NSDictionary *motion;
@@ -15,10 +13,5 @@
 - (void)setHeading:(NSDictionary *)value;
 - (NSDictionary *)getHeading;
 - (NSDictionary *)getMotion;
-
-- (void)locationManager:(CLLocationManager *)manager
-didUpdateLocations:(NSArray *)locations;
-- (void)locationManager:(CLLocationManager *)manager
-didUpdateHeading:(CLHeading *)newHeading;
 
 @end
