@@ -1,4 +1,5 @@
 #import "MainViewController.h"
+#import "MainView.h"
  
 @implementation MainViewController
 
@@ -8,28 +9,15 @@
 - (void)loadView {
   // start locating
   gps = [[Position alloc] init];
-
   // create the main view
   CGRect mainFrame = [[UIScreen mainScreen] applicationFrame];
-  UIView *mainView = [[UIView alloc] initWithFrame:mainFrame];
-  mainView.backgroundColor = [UIColor blueColor];
+  MainView *mainView = [[MainView alloc] initWithFrame:mainFrame];
   self.view = mainView;
-
-  // create button
-  UIButton *positionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-  positionButton.frame = CGRectMake(10,10,150,50);
-  positionButton.center = self.view.center;
-  [positionButton setTitle:@"Log my coords!" forState:UIControlStateNormal];
-  [positionButton addTarget:self action:@selector(buttonTouched:)
-    forControlEvents:UIControlEventTouchUpInside];
-
-  // place the button on the mainView
-  [mainView addSubview:positionButton];
 }
 
 -(void)buttonTouched:(id)sender {
- NSLog(@"Longitute: %@", [gps.coords objectForKey:@"longitude"]);
- NSLog(@"Latitude: %@", [gps.coords objectForKey:@"latitude"]);
+  NSLog(@"Longitute: %@", [gps.coords objectForKey:@"longitude"]);
+  NSLog(@"Latitude: %@", [gps.coords objectForKey:@"latitude"]);
 }
 
 @end
