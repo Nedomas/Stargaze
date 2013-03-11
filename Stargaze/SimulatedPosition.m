@@ -31,12 +31,12 @@
   return heading;
 }
 
-- (NSDictionary *)getMotion {
-  return motion;
-}
-
 - (void)setMotion:(NSDictionary *)value {
   motion = value;
+}
+
+- (NSDictionary *)getMotion {
+  return motion;
 }
 
 @end

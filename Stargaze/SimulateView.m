@@ -21,6 +21,27 @@
   latitudeField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
   [self addSubview:latitudeField];
 
+  UITextField *headingField = [[UITextField alloc] initWithFrame:CGRectMake(30, 110, 100, 40)];
+  headingField.tag = 3;
+  headingField.borderStyle = UITextBorderStyleRoundedRect;
+  headingField.placeholder = @"heading";
+  headingField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+  [self addSubview:headingField];
+
+  UITextField *rollField = [[UITextField alloc] initWithFrame:CGRectMake(30, 160, 100, 40)];
+  rollField.tag = 4;
+  rollField.borderStyle = UITextBorderStyleRoundedRect;
+  rollField.placeholder = @"roll";
+  rollField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+  [self addSubview:rollField];
+
+  UITextField *pitchField = [[UITextField alloc] initWithFrame:CGRectMake(30, 210, 100, 40)];
+  pitchField.tag = 5;
+  pitchField.borderStyle = UITextBorderStyleRoundedRect;
+  pitchField.placeholder = @"pitch";
+  pitchField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+  [self addSubview:pitchField];
+
   // create submit button
   UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   saveButton.tag = 3;

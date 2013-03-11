@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
 #import "AppDelegate.h"
+
+BOOL simulate = YES;
 
 int main(int argc, char *argv[])
 {

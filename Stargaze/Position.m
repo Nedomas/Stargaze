@@ -49,6 +49,10 @@ didUpdateHeading:(CLHeading *)newHeading {
   [self setHeading:[[NSDictionary alloc] initWithObjectsAndKeys: [NSString stringWithFormat:@"%f", newHeading.trueHeading], @"heading", nil]];
 }
 
+- (void)setMotion:(NSDictionary *)value {
+  motion = value;
+}
+
 - (NSDictionary *)getMotion {
   NSDictionary *value = [[NSDictionary alloc] initWithObjectsAndKeys:
     [NSString stringWithFormat:@"%f", motionDude.deviceMotion.attitude.roll], @"roll",

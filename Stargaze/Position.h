@@ -14,6 +14,7 @@
 - (NSDictionary *)getCoords;
 - (void)setHeading:(NSDictionary *)value;
 - (NSDictionary *)getHeading;
+- (void)setMotion:(NSDictionary *)value;
 - (NSDictionary *)getMotion;
 
 - (void)locationManager:(CLLocationManager *)manager
