@@ -23,10 +23,15 @@
 - (NSDictionary *)getCoords {
   return coords;
 }
+- (struct Pos) getPos {
+  return pos;
+}
 
 - (void)locationManager:(CLLocationManager *)manager
 didUpdateLocations:(NSArray *)locations {
   CLLocationCoordinate2D coordinates = [[locations lastObject] coordinate];
+  pos.lon = coordinates.longitude;
+  pos.lat = coordinates.latitude;
   [self setCoords:[[NSDictionary alloc] initWithObjectsAndKeys:
     [NSString stringWithFormat:@"%f", coordinates.longitude], @"longitude",
     [NSString stringWithFormat:@"%f", coordinates.latitude], @"latitude", nil]];
